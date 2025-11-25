@@ -111,7 +111,7 @@ export const KeyboardSlider = ({
       {/* Letter Preview */}
       {snappedIndex !== null && isActive && (
         <div
-          className="absolute -top-12 transform -translate-x-1/2 transition-all duration-150"
+          className="absolute -top-8 transform -translate-x-1/2 transition-all duration-150"
           style={{ left: `${dotPosition}px` }}
         >
           <div className="bg-foreground text-background px-3 py-1 rounded font-medium text-base">
@@ -159,7 +159,7 @@ export const KeyboardSlider = ({
               {/* Snap Zone Indicator */}
               {isActive && isSnapped && (
                 <div
-                  className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full border-2 border-foreground transition-all"
+                  className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full border-2 border-foreground transition-all"
                 />
               )}
 
@@ -229,7 +229,7 @@ export const KeyboardSlider = ({
 
       {/* Confirm Button (appears when letter is selected) */}
       {snappedIndex !== null && isActive && (
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center mt-6">
           <button
             onClick={handleConfirm}
             className="bg-foreground text-background px-6 py-2 rounded font-medium text-sm hover:bg-muted-foreground transition-colors"
