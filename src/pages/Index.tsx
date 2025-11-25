@@ -15,7 +15,6 @@ const Index = () => {
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
   ];
 
-  const TARGET_TEXT = "The quick brown fox jumps over the lazy dog";
   const [typedText, setTypedText] = useState('');
   const [activeRow, setActiveRow] = useState<number | null>(null);
   const [isShiftActive, setIsShiftActive] = useState(false);
@@ -106,15 +105,9 @@ const Index = () => {
     const words = text.trim().split(/\s+/).length;
     const wpm = minutes > 0 ? Math.round(words / minutes) : 0;
 
-    let correct = 0;
-    for (let i = 0; i < Math.min(text.length, TARGET_TEXT.length); i++) {
-      if (text[i] === TARGET_TEXT[i]) correct++;
-    }
-    const accuracy = text.length > 0 ? Math.round((correct / text.length) * 100) : 0;
-
     const avgTimePerChar = text.length > 0 ? elapsed / text.length : 0;
 
-    return { wpm, accuracy, avgTimePerChar };
+    return { wpm, avgTimePerChar };
   };
 
   const handleSubmit = async () => {
@@ -132,10 +125,10 @@ const Index = () => {
 
     const { error } = await supabase.from('trials').insert({
       typed_text: typedText,
-      target_text: TARGET_TEXT,
+      target_text: typedText,
       elapsed_time: elapsedTime,
       wpm: metrics.wpm,
-      accuracy: metrics.accuracy,
+      accuracy: 100,
       total_drag_distance: totalDragDistance,
       character_count: typedText.length,
       avg_time_per_char: metrics.avgTimePerChar,
@@ -204,7 +197,7 @@ const Index = () => {
         <MetricsPanel
           startTime={startTime}
           typedText={typedText}
-          targetText={TARGET_TEXT}
+          targetText={typedText}
           totalDragDistance={totalDragDistance}
           trialCount={trialCount}
         />
