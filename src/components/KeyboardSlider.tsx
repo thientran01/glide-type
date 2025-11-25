@@ -111,7 +111,7 @@ export const KeyboardSlider = ({
       {/* Letter Preview */}
       {snappedIndex !== null && isActive && (
         <div
-          className="absolute top-0 transform -translate-x-1/2 transition-all duration-150"
+          className="absolute -top-12 transform -translate-x-1/2 transition-all duration-150"
           style={{ left: `${dotPosition}px` }}
         >
           <div className="bg-foreground text-background px-3 py-1 rounded font-medium text-base">
@@ -159,13 +159,13 @@ export const KeyboardSlider = ({
               {/* Snap Zone Indicator */}
               {isActive && isSnapped && (
                 <div
-                  className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full border border-foreground transition-all"
+                  className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full border-2 border-foreground transition-all"
                 />
               )}
 
               {/* Letter */}
               <div
-                className={`absolute top-7 left-1/2 transform -translate-x-1/2 text-base transition-all ${
+                className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-base transition-all ${
                   isSnapped
                     ? 'text-foreground font-semibold'
                     : isActive

@@ -228,8 +228,8 @@ const Index = () => {
           />
         </div>
 
-        {/* Clear Button */}
-        <div className="flex justify-center mt-4">
+        {/* Clear Button - aligned with Submit */}
+        <div className="flex justify-center mt-2">
           <Button
             variant="outline"
             onClick={handleClear}
