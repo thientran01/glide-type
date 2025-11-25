@@ -224,18 +224,9 @@ const Index = () => {
             onDelete={handleDelete}
             onShift={handleShift}
             onSubmit={handleSubmit}
+            onClear={handleClear}
             isShiftActive={isShiftActive}
           />
-        </div>
-
-        {/* Clear Button - aligned with Submit */}
-        <div className="flex justify-center mt-2">
-          <Button
-            variant="outline"
-            onClick={handleClear}
-          >
-            CLEAR
-          </Button>
         </div>
       </div>
     </div>

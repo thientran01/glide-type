@@ -3,6 +3,7 @@ interface ControlButtonsProps {
   onDelete: () => void;
   onShift: () => void;
   onSubmit: () => void;
+  onClear: () => void;
   isShiftActive: boolean;
 }
 
@@ -11,6 +12,7 @@ export const ControlButtons = ({
   onDelete,
   onShift,
   onSubmit,
+  onClear,
   isShiftActive,
 }: ControlButtonsProps) => {
   return (
@@ -43,11 +45,18 @@ export const ControlButtons = ({
         </button>
       </div>
 
-      {/* Bottom Row - Submit aligned with Delete */}
-      <div className="flex justify-end">
+      {/* Bottom Row - Clear center, Submit right */}
+      <div className="flex items-center justify-center relative">
+        <button
+          onClick={onClear}
+          className="bg-background text-foreground px-4 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
+        >
+          CLEAR
+        </button>
+        
         <button
           onClick={onSubmit}
-          className="bg-foreground text-background px-6 py-2 rounded text-sm font-medium hover:bg-muted-foreground transition-colors border border-foreground"
+          className="bg-foreground text-background px-6 py-2 rounded text-sm font-medium hover:bg-muted-foreground transition-colors border border-foreground absolute right-0"
         >
           SUBMIT
         </button>
