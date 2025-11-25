@@ -70,7 +70,6 @@ const SavedTrials = () => {
       'Target Text',
       'Time (s)',
       'WPM',
-      'Accuracy (%)',
       'Total Drag Distance (px)',
       'Characters',
       'Avg Time/Char (s)',
@@ -83,8 +82,7 @@ const SavedTrials = () => {
       `"${t.target_text}"`,
       (t.elapsed_time / 1000).toFixed(1),
       t.wpm,
-      t.accuracy,
-      t.total_drag_distance,
+      Number(t.total_drag_distance).toFixed(2),
       t.character_count,
       (t.avg_time_per_char / 1000).toFixed(3),
       new Date(t.created_at).toLocaleString()
@@ -187,7 +185,7 @@ const SavedTrials = () => {
                     <p className="text-foreground font-mono">{trial.typed_text}</p>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div>
                       <p className="text-xs text-muted-foreground">Time</p>
                       <p className="text-lg font-semibold text-foreground">
@@ -199,13 +197,9 @@ const SavedTrials = () => {
                       <p className="text-lg font-semibold text-foreground">{trial.wpm}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground">Accuracy</p>
-                      <p className="text-lg font-semibold text-foreground">{trial.accuracy}%</p>
-                    </div>
-                    <div>
                       <p className="text-xs text-muted-foreground">Drag Distance</p>
                       <p className="text-lg font-semibold text-foreground">
-                        {trial.total_drag_distance}px
+                        {Number(trial.total_drag_distance).toFixed(2)}px
                       </p>
                     </div>
                     <div>
@@ -223,7 +217,7 @@ const SavedTrials = () => {
                     <div>
                       <p className="text-xs text-muted-foreground">MSD</p>
                       <p className="text-lg font-semibold text-foreground">
-                        {Math.round(trial.total_drag_distance / trial.character_count)}px
+                        {(Number(trial.total_drag_distance) / trial.character_count).toFixed(2)}px
                       </p>
                     </div>
                   </div>

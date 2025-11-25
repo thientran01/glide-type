@@ -128,8 +128,8 @@ const Index = () => {
       target_text: typedText,
       elapsed_time: elapsedTime,
       wpm: metrics.wpm,
-      accuracy: 100,
-      total_drag_distance: totalDragDistance,
+      accuracy: 0,
+      total_drag_distance: Math.round(totalDragDistance * 100) / 100,
       character_count: typedText.length,
       avg_time_per_char: metrics.avgTimePerChar,
     });

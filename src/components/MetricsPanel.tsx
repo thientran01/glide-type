@@ -33,10 +33,6 @@ export const MetricsPanel = ({
     }
   }, [startTime]);
 
-  const calculateAccuracy = () => {
-    return 100;
-  };
-
   const calculateWPM = () => {
     if (elapsedTime === 0) return 0;
     const minutes = elapsedTime / 60000;
@@ -46,7 +42,7 @@ export const MetricsPanel = ({
 
   const calculateMSD = () => {
     if (typedText.length === 0) return 0;
-    return Math.round(totalDragDistance / typedText.length);
+    return Math.round((totalDragDistance / typedText.length) * 100) / 100;
   };
 
   const formatTime = (ms: number) => {
@@ -99,13 +95,6 @@ export const MetricsPanel = ({
             <div className="text-xs text-muted-foreground mb-1">Avg Time/Char</div>
             <div className="text-lg font-mono text-foreground">
               {formatTime(averageTimePerChar)}
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="text-xs text-muted-foreground mb-1">Accuracy</div>
-            <div className="text-lg font-mono text-foreground">
-              {calculateAccuracy()}%
             </div>
           </div>
         </div>
