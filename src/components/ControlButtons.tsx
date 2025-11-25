@@ -30,7 +30,7 @@ export const ControlButtons = ({
 
         <button
           onClick={onSpace}
-          className="bg-background text-foreground px-8 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
+          className="bg-background text-foreground px-12 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
         >
           SPACE
         </button>
