@@ -14,9 +14,9 @@ export const ControlButtons = ({
   isShiftActive,
 }: ControlButtonsProps) => {
   return (
-    <div className="relative w-full flex gap-2">
-      {/* Left Column - Shift, Space, Delete */}
-      <div className="flex flex-col gap-2">
+    <div className="relative w-full flex flex-col gap-2">
+      {/* Top Row - Shift, Space, Delete aligned horizontally */}
+      <div className="flex items-center justify-between gap-2">
         <button
           onClick={onShift}
           className={`px-4 py-2 rounded text-sm font-medium transition-colors border ${
@@ -30,7 +30,7 @@ export const ControlButtons = ({
 
         <button
           onClick={onSpace}
-          className="bg-background text-foreground px-4 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
+          className="bg-background text-foreground px-8 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
         >
           SPACE
         </button>
@@ -43,8 +43,8 @@ export const ControlButtons = ({
         </button>
       </div>
 
-      {/* Right Column - Submit aligned with Delete */}
-      <div className="flex flex-col justify-end">
+      {/* Bottom Row - Submit aligned with Delete */}
+      <div className="flex justify-end">
         <button
           onClick={onSubmit}
           className="bg-foreground text-background px-6 py-2 rounded text-sm font-medium hover:bg-muted-foreground transition-colors border border-foreground"

@@ -34,12 +34,7 @@ export const MetricsPanel = ({
   }, [startTime]);
 
   const calculateAccuracy = () => {
-    if (typedText.length === 0) return 100;
-    let correct = 0;
-    for (let i = 0; i < Math.min(typedText.length, targetText.length); i++) {
-      if (typedText[i] === targetText[i]) correct++;
-    }
-    return Math.round((correct / typedText.length) * 100);
+    return 100;
   };
 
   const calculateWPM = () => {
@@ -63,7 +58,6 @@ export const MetricsPanel = ({
   const averageTimePerChar =
     typedText.length > 0 ? elapsedTime / typedText.length : 0;
 
-  const isComplete = typedText === targetText;
   const showMetrics = trialCount >= 20;
 
   return (
@@ -97,7 +91,7 @@ export const MetricsPanel = ({
           <div className="text-center">
             <div className="text-xs text-muted-foreground mb-1">Characters</div>
             <div className="text-lg font-mono text-foreground">
-              {typedText.length}/{targetText.length}
+              {typedText.length}
             </div>
           </div>
 
@@ -115,18 +109,6 @@ export const MetricsPanel = ({
             </div>
           </div>
         </div>
-
-          {isComplete && (
-            <div className="mt-4 p-3 bg-muted border border-border rounded text-center">
-              <div className="text-lg font-medium text-foreground mb-1">
-                Complete!
-              </div>
-              <div className="text-xs text-foreground">
-                You typed "{targetText}" in {formatTime(elapsedTime)} with{' '}
-                {calculateAccuracy()}% accuracy
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>
