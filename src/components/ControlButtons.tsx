@@ -21,7 +21,7 @@ export const ControlButtons = ({
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={onShift}
-          className={`px-4 py-2 rounded text-sm font-medium transition-colors border ${
+          className={`w-24 py-2 rounded text-sm font-medium transition-colors border ${
             isShiftActive
               ? 'bg-foreground text-background border-foreground'
               : 'bg-background text-foreground border-foreground hover:bg-muted'
@@ -32,7 +32,7 @@ export const ControlButtons = ({
 
         <button
           onClick={onSpace}
-          className="bg-background text-foreground px-12 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
+          className="bg-background text-foreground px-24 py-2 rounded text-sm font-medium hover:bg-muted transition-colors border border-foreground"
         >
           SPACE
         </button>
