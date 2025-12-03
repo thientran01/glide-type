@@ -183,7 +183,7 @@ export const KeyboardSlider = ({
                   : 'bg-background border-foreground hover:bg-muted'
               }`}
             >
-              <div className={`w-full h-full flex items-center justify-center text-[10px] font-medium ${
+              <div className={`w-full h-full flex items-center justify-center text-[8px] font-medium ${
                 isActive ? 'text-background' : 'text-foreground'
               }`}>
                 {isActive ? '▶' : 'START'}
