@@ -52,8 +52,7 @@ const Index = () => {
     if (isShiftActive) {
       setIsShiftActive(false);
     }
-
-    setActiveRow(null);
+    // Keep the row active so the slider stays in position for consecutive letters
   };
 
   const handleSpace = () => {
