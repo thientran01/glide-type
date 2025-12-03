@@ -228,12 +228,13 @@ export const KeyboardSlider = ({
         )}
       </div>
 
-      {/* Confirm Button (appears when letter is selected) */}
+      {/* Confirm Button (follows the dot position) */}
       {snappedIndex !== null && isActive && (
-        <div className="flex justify-center mt-6">
+        <div className="relative mt-6 h-10">
           <button
             onClick={handleConfirm}
-            className="bg-foreground text-background px-6 py-2 rounded font-medium text-sm hover:bg-muted-foreground transition-colors"
+            className="absolute transform -translate-x-1/2 bg-foreground text-background px-6 py-2 rounded font-medium text-sm hover:bg-muted-foreground transition-all"
+            style={{ left: `${dotPosition}px` }}
           >
             ENTER
           </button>
