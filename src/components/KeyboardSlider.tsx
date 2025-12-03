@@ -156,13 +156,6 @@ export const KeyboardSlider = ({
                 }`}
               />
               
-              {/* Snap Zone Indicator */}
-              {isActive && isSnapped && (
-                <div
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-2 border-foreground transition-all"
-                />
-              )}
-
               {/* Letter */}
               <div
                 className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-base transition-all ${
@@ -202,6 +195,14 @@ export const KeyboardSlider = ({
               </div>
             )}
           </div>
+        )}
+
+        {/* Snap Zone Indicator (positioned at dot level) */}
+        {isActive && snappedIndex !== null && dotPosition > 0 && (
+          <div
+            className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full border-2 border-foreground transition-all pointer-events-none"
+            style={{ left: `${dotPosition}px` }}
+          />
         )}
 
         {/* Draggable Dot (visible when active and dot has moved) */}
