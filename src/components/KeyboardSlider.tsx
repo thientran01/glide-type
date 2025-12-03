@@ -81,8 +81,8 @@ export const KeyboardSlider = ({
       const letter = letters[snappedIndex];
       const dragDistance = Math.abs(dotPosition - dragStartPosition);
       onLetterSelect(isShiftActive ? letter.toUpperCase() : letter.toLowerCase(), dragDistance);
-      setDotPosition(0);
-      setDragStartPosition(0);
+      // Keep the dot where it is for easier consecutive letter typing
+      setDragStartPosition(dotPosition);
       setSnappedIndex(null);
     }
   };
