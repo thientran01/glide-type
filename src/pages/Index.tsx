@@ -3,10 +3,34 @@ import { TextDisplay } from '@/components/TextDisplay';
 import { KeyboardSlider } from '@/components/KeyboardSlider';
 import { ControlButtons } from '@/components/ControlButtons';
 import { MetricsPanel } from '@/components/MetricsPanel';
+import { TargetSentence } from '@/components/TargetSentence';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+
+const TRIAL_SENTENCES = [
+  "She packed twelve blue pens in her small bag.",
+  "Every bird sang sweet songs in the quiet dawn.",
+  "They watched clouds drift across the golden sky.",
+  "A clever mouse slipped past the sleepy cat.",
+  "Green leaves danced gently in the warm breeze.",
+  "He quickly wrote notes before the test began.",
+  "The tall man wore boots made of soft leather.",
+  "Old clocks ticked loudly in the silent room.",
+  "She smiled while sipping tea on the front porch.",
+  "We found a hidden path behind the old barn.",
+  "Sunlight streamed through cracks in the ceiling.",
+  "Dogs barked at shadows moving through the yard.",
+  "Rain tapped softly against the window glass.",
+  "Bright stars twinkled above the quiet valley.",
+  "He tied the package with ribbon and string.",
+  "A sudden breeze blew papers off the desk.",
+  "The curious child opened every single drawer.",
+  "Fresh apples fell from the heavy tree limbs.",
+  "The artist painted scenes from her memory.",
+  "They danced all night under the glowing moon.",
+];
 
 const Index = () => {
   const KEYBOARD_ROWS = [
@@ -21,8 +45,11 @@ const Index = () => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [totalDragDistance, setTotalDragDistance] = useState(0);
   const [trialCount, setTrialCount] = useState(0);
+  const [currentTrialIndex, setCurrentTrialIndex] = useState(0);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const currentTargetSentence = TRIAL_SENTENCES[currentTrialIndex];
 
   useEffect(() => {
     fetchTrialCount();
@@ -124,7 +151,7 @@ const Index = () => {
 
     const { error } = await supabase.from('trials').insert({
       typed_text: typedText,
-      target_text: typedText,
+      target_text: currentTargetSentence,
       elapsed_time: elapsedTime,
       wpm: metrics.wpm,
       accuracy: 0,
@@ -146,6 +173,10 @@ const Index = () => {
         description: `Trial ${trialCount + 1}/20 saved successfully`,
       });
       handleClear();
+      // Move to next trial sentence
+      if (currentTrialIndex < TRIAL_SENTENCES.length - 1) {
+        setCurrentTrialIndex(prev => prev + 1);
+      }
     }
   };
 
@@ -188,6 +219,13 @@ const Index = () => {
             </Button>
           </div>
         </div>
+
+        {/* Target Sentence Display */}
+        <TargetSentence 
+          sentence={currentTargetSentence}
+          currentIndex={currentTrialIndex}
+          totalTrials={TRIAL_SENTENCES.length}
+        />
 
         {/* Text Display */}
         <TextDisplay typedText={typedText} />
