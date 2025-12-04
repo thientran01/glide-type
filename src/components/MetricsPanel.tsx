@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-
-interface MetricsPanelProps {
-  startTime: number | null;
-  typedText: string;
-  targetText: string;
-  totalDragDistance: number;
-}
+import { calculateMSD } from '@/lib/levenshtein';
 
 interface MetricsPanelProps {
   startTime: number | null;
@@ -40,9 +34,9 @@ export const MetricsPanel = ({
     return Math.round(words / minutes);
   };
 
-  const calculateMSD = () => {
+  const getMSD = () => {
     if (typedText.length === 0) return 0;
-    return Math.round((totalDragDistance / typedText.length) * 100) / 100;
+    return calculateMSD(targetText, typedText);
   };
 
   const formatTime = (ms: number) => {
@@ -80,7 +74,7 @@ export const MetricsPanel = ({
           <div className="text-center">
             <div className="text-xs text-muted-foreground mb-1">MSD</div>
             <div className="text-lg font-mono text-foreground">
-              {calculateMSD()}px
+              {getMSD()}
             </div>
           </div>
 

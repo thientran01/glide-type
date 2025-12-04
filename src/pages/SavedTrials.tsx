@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Download } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { calculateMSD } from '@/lib/levenshtein';
 
 interface Trial {
   id: string;
@@ -175,7 +176,7 @@ const SavedTrials = () => {
                 <div>
                   <p className="text-xs text-muted-foreground">Avg MSD</p>
                   <p className="text-lg font-semibold text-foreground">
-                    {(trials.reduce((sum, t) => sum + Number(t.total_drag_distance) / t.character_count, 0) / trials.length).toFixed(2)}px
+                    {(trials.reduce((sum, t) => sum + calculateMSD(t.target_text, t.typed_text), 0) / trials.length).toFixed(1)}
                   </p>
                 </div>
               </div>
@@ -254,7 +255,7 @@ const SavedTrials = () => {
                     <div>
                       <p className="text-xs text-muted-foreground">MSD</p>
                       <p className="text-lg font-semibold text-foreground">
-                        {(Number(trial.total_drag_distance) / trial.character_count).toFixed(2)}px
+                        {calculateMSD(trial.target_text, trial.typed_text)}
                       </p>
                     </div>
                   </div>

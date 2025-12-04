@@ -230,7 +230,7 @@ const Index = () => {
         <MetricsPanel
           startTime={startTime}
           typedText={typedText}
-          targetText={typedText}
+          targetText={currentTargetSentence}
           totalDragDistance={totalDragDistance}
           trialCount={trialCount}
         />
