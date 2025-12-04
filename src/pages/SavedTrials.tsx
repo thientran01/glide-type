@@ -74,11 +74,12 @@ const SavedTrials = () => {
       'Total Drag Distance (px)',
       'Characters',
       'Avg Time/Char (s)',
+      'MSD',
       'Date/Time'
     ];
 
-    const rows = trialsToExport.map((t, index) => [
-      trials.length - trials.findIndex(trial => trial.id === t.id),
+    const rows = trialsToExport.map((t) => [
+      trials.length - trials.findIndex(tr => tr.id === t.id),
       `"${t.typed_text}"`,
       `"${t.target_text}"`,
       (t.elapsed_time / 1000).toFixed(1),
@@ -86,12 +87,36 @@ const SavedTrials = () => {
       Number(t.total_drag_distance).toFixed(2),
       t.character_count,
       (t.avg_time_per_char / 1000).toFixed(3),
+      calculateMSD(t.target_text, t.typed_text),
       new Date(t.created_at).toLocaleString()
     ]);
 
+    // Calculate averages for the summary row
+    const avgTime = (trialsToExport.reduce((sum, t) => sum + t.elapsed_time, 0) / trialsToExport.length / 1000).toFixed(1);
+    const avgWPM = Math.round(trialsToExport.reduce((sum, t) => sum + t.wpm, 0) / trialsToExport.length);
+    const avgDragDistance = (trialsToExport.reduce((sum, t) => sum + Number(t.total_drag_distance), 0) / trialsToExport.length).toFixed(2);
+    const avgCharacters = Math.round(trialsToExport.reduce((sum, t) => sum + t.character_count, 0) / trialsToExport.length);
+    const avgTimePerChar = (trialsToExport.reduce((sum, t) => sum + t.avg_time_per_char, 0) / trialsToExport.length / 1000).toFixed(3);
+    const avgMSD = (trialsToExport.reduce((sum, t) => sum + calculateMSD(t.target_text, t.typed_text), 0) / trialsToExport.length).toFixed(1);
+
+    const averagesRow = [
+      'AVERAGES',
+      '',
+      '',
+      avgTime,
+      avgWPM,
+      avgDragDistance,
+      avgCharacters,
+      avgTimePerChar,
+      avgMSD,
+      ''
+    ];
+
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.join(','))
+      ...rows.map(row => row.join(',')),
+      '', // Empty row before averages
+      averagesRow.join(',')
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
