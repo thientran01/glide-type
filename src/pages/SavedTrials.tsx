@@ -144,6 +144,43 @@ const SavedTrials = () => {
           </div>
         ) : (
           <>
+            {/* Averages Summary Box */}
+            <div className="bg-card border border-border rounded-lg p-6 mb-6">
+              <h2 className="text-xl font-semibold text-foreground mb-4">Overall Averages</h2>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg Time</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {(trials.reduce((sum, t) => sum + t.elapsed_time, 0) / trials.length / 1000).toFixed(1)}s
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg WPM</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {Math.round(trials.reduce((sum, t) => sum + t.wpm, 0) / trials.length)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg Drag Distance</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {(trials.reduce((sum, t) => sum + Number(t.total_drag_distance), 0) / trials.length).toFixed(2)}px
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg Characters</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {Math.round(trials.reduce((sum, t) => sum + t.character_count, 0) / trials.length)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Avg MSD</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {(trials.reduce((sum, t) => sum + Number(t.total_drag_distance) / t.character_count, 0) / trials.length).toFixed(2)}px
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div className="flex justify-end mb-4">
               <Button
                 onClick={() => exportToCSV()}

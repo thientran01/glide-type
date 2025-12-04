@@ -221,11 +221,7 @@ const Index = () => {
         </div>
 
         {/* Target Sentence Display */}
-        <TargetSentence 
-          sentence={currentTargetSentence}
-          currentIndex={currentTrialIndex}
-          totalTrials={TRIAL_SENTENCES.length}
-        />
+        <TargetSentence sentence={currentTargetSentence} />
 
         {/* Text Display */}
         <TextDisplay typedText={typedText} />
